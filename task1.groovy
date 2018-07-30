@@ -43,7 +43,6 @@ void main() {
                 path: "${nexus_server}${options.r}/${groupid}/${artifactid}/${version}/${options.a}"
 
         )
-        Println(resp)
         assert resp.status == 200
         new File("./${options.a}") << resp.data
     } else {
