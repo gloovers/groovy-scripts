@@ -28,6 +28,7 @@ void main() {
     def fn = options.a
     if (options.a == 'NONE'){
         fn = System.getenv('ARTIFACT_NAME')
+        fn = fn.split('/')[-1]
         println(fn)
     }
 
