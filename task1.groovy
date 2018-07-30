@@ -25,8 +25,9 @@ void main() {
         return
     }
     ////////////////////////////////////////
-    if (options.a == '*'){
+    if (options.a == 'NONE'){
         options.a = System.getenv('ARTIFACT_NAME')
+        println(options.a)
     }
 
     version = options.a.split('.tar.gz')[0].split('-')[-1]
