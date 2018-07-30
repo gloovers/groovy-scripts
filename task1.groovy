@@ -25,6 +25,10 @@ void main() {
         return
     }
     ////////////////////////////////////////
+    if (options.a == '*'){
+        options.a = System.getenv('ARTIFACT_NAME')
+    }
+
     version = options.a.split('.tar.gz')[0].split('-')[-1]
     groupid = artifactid = options.a.split("-${version}.tar.gz")[0]
     def rest = new RESTClient(nexus_server)
