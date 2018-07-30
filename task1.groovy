@@ -27,7 +27,7 @@ void main() {
     ////////////////////////////////////////
     def fn = options.a
     if (fn == 'NONE'){
-        fn = System.getenv('WORKSPACE').split('/')[-1]
+        fn = System.getenv('ARTIFACT_NAME_F').split('/')[-1]
         println(fn)
     }
 
