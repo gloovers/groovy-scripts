@@ -25,31 +25,32 @@ void main() {
         return
     }
     ////////////////////////////////////////
+    def fn = options.a
     if (options.a == 'NONE'){
-        options.a = System.getenv('ARTIFACT_NAME')
-        println(options.a)
+        fn = System.getenv('ARTIFACT_NAME')
+        println(fn)
     }
 
-    version = options.a.split('.tar.gz')[0].split('-')[-1]
-    groupid = artifactid = options.a.split("-${version}.tar.gz")[0]
+    version = fn.split('.tar.gz')[0].split('-')[-1]
+    groupid = artifactid = fn.split("-${version}.tar.gz")[0]
     def rest = new RESTClient(nexus_server)
     rest.auth.basic "${username}", "${password}"
 
     if (options.c == 'push') {
         rest.encoder.'application/x-gzip' = this.&encodeZipFile
         resp = rest.put(
-                path: "${options.r}/${groupid}/${artifactid}/${version}/${options.a}",
-                body: new File(options.a),
+                path: "${options.r}/${groupid}/${artifactid}/${version}/${fn}",
+                body: new File(fn),
                 requestContentType: 'application/x-gzip'
         )
         assert resp.status == 201
     } else if(options.c == 'pull'){
         resp = rest.get(
-                path: "${nexus_server}${options.r}/${groupid}/${artifactid}/${version}/${options.a}"
+                path: "${nexus_server}${options.r}/${groupid}/${artifactid}/${version}/${fn}"
 
         )
         assert resp.status == 200
-        new File("./${options.a}") << resp.data
+        new File("./${fn}") << resp.data
     } else {
         Println ('Command is not correct!')
     }
