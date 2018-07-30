@@ -26,10 +26,6 @@ void main() {
     }
     ////////////////////////////////////////
     def fn = options.a
-    if (fn == 'NONE'){
-        fn = System.getenv('ARTIFACT_NAME_F').split('/')[-1]
-        println(fn)
-    }
 
     version = fn.split('.tar.gz')[0].split('-')[-1]
     groupid = artifactid = fn.split("-${version}.tar.gz")[0]
