@@ -26,7 +26,6 @@ void main() {
     }
     ////////////////////////////////////////
     def fn = options.a
-
     version = fn.split('.tar.gz')[0].split('-')[-1]
     groupid = artifactid = fn.split("-${version}.tar.gz")[0]
     def rest = new RESTClient(nexus_server)
